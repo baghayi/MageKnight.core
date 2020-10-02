@@ -1,0 +1,17 @@
+{
+    "name": "baghayi/mageknight.core",
+    "description": "Mage Night Board Game Mechanics",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Husen Baghayi",
+            "email": "hossein.baghayi@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9.4"
+    }
+}
