@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  php:
+    image: php:8.0.0beta4-alpine
+    volumes:
+      - .:/code
+    network_mode: "bridge"
+  composer:
+    image: composer:latest
+    volumes:
+      - .:/code
+    network_mode: "bridge"
