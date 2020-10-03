@@ -6,4 +6,5 @@ namespace MageKnight\EnemyCombat;
 
 interface Phase
 {
+    public function execute(): Phase;
 }

@@ -6,4 +6,8 @@ namespace MageKnight\EnemyCombat;
 
 class PhaseOne implements Phase
 {
+    public function execute(): Phase
+    {
+        return new PhaseTwo();
+    }
 }
