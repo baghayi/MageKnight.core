@@ -6,4 +6,5 @@ namespace MageKnight\Enemy;
 
 interface Enemy
 {
+    public function isDoubleFortified(): bool;
 }
