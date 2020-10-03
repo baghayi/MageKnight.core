@@ -9,7 +9,6 @@ use MageKnight\EnemyCombat\Combat;
 use MageKnight\EnemyCombat\PhaseOne;
 use MageKnight\EnemyCombat\PhaseTwo;
 use MageKnight\Enemy\Enemy;
-use MageKnight\Enemy\EnemyGroup;
 
 class CombatTest extends TestCase
 {
@@ -21,20 +20,6 @@ class CombatTest extends TestCase
     {
         $combat = new Combat();
         $phase_one = $combat->initiateCombat($this->getEnemy());
-        $this->assertInstanceOf(PhaseOne::class, $phase_one);
-    }
-
-    /**
-    * @test
-    * @covers \MageKnight\EnemyCombat\Combat::initiateCombat
-    */
-    public function initiatte_attack_on_group_of_enemies()
-    {
-        $this->markTestSkipped();
-        $combat = new Combat();
-        $phase_one = $combat->initiateCombat(
-            new EnemyGroup([$this->getEnemy(), $this->getEnemy()])
-        );
         $this->assertInstanceOf(PhaseOne::class, $phase_one);
     }
 
