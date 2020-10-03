@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace MageKnight\EnemyCombat;
 
-class PhaseTwo implements CombatPhase
+class PhaseTwo implements Phase
 {
 }

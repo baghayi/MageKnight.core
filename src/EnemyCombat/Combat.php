@@ -9,7 +9,7 @@ use MageKnight\Enemy\EnemyGroup;
 
 class Combat
 {
-    public function initiateCombat(Enemy $enemy): CombatPhase
+    public function initiateCombat(Enemy $enemy): Phase
     {
         if ($enemy->isDoubleFortified())
             return new PhaseTwo();
