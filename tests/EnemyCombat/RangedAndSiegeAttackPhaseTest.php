@@ -6,7 +6,7 @@ namespace Test\MageKnight\EnemyCombat;
 
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
-use MageKnight\EnemyCombat\PhaseTwo;
+use MageKnight\EnemyCombat\BlockPhase;
 
 class RangedAndSiegeAttackPhaseTest extends TestCase
 {
@@ -19,6 +19,6 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
     {
         $phase = new RangedAndSiegeAttackPhase();
         $phase_two = $phase->execute();
-        $this->assertInstanceof(PhaseTwo::class, $phase_two);
+        $this->assertInstanceof(BlockPhase::class, $phase_two);
     }
 }

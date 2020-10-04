@@ -12,7 +12,7 @@ class Combat
     public function initiateCombat(Enemy $enemy): Phase
     {
         if ($enemy->isDoubleFortified())
-            return new PhaseTwo();
+            return new BlockPhase();
         return new RangedAndSiegeAttackPhase();
     }
 }

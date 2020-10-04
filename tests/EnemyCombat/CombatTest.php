@@ -7,7 +7,7 @@ namespace Test\EnemyCombat;
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Combat;
 use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
-use MageKnight\EnemyCombat\PhaseTwo;
+use MageKnight\EnemyCombat\BlockPhase;
 use MageKnight\Enemy\Enemy;
 
 class CombatTest extends TestCase
@@ -31,7 +31,7 @@ class CombatTest extends TestCase
     {
         $combat = new Combat();
         $combat_phase = $combat->initiateCombat($this->getDoubleFortifiedEnemy());
-        $this->assertInstanceOf(PhaseTwo::class, $combat_phase);
+        $this->assertInstanceOf(BlockPhase::class, $combat_phase);
     }
 
     private function getEnemy(): Enemy

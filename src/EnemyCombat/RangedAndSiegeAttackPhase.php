@@ -8,7 +8,7 @@ class RangedAndSiegeAttackPhase implements Phase
 {
     public function execute(): Phase
     {
-        return new PhaseTwo();
+        return new BlockPhase();
     }
 
     public function title(): string
