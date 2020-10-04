@@ -8,7 +8,7 @@ class BlockPhase implements Phase
 {
     public function execute(): Phase
     {
-        return new PhaseThree();
+        return new AssignDamagePhase();
     }
 
     public function title(): string
