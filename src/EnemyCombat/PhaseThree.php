@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace MageKnight\EnemyCombat;
 
-class PhaseTwo implements Phase
+class PhaseThree implements Phase
 {
     public function execute(): Phase
     {
-        return new PhaseThree();
     }
 
     public function title(): string
     {
-        return 'Block Phase';
+        return 'Assign Damage Phase';
     }
 }
