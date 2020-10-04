@@ -6,7 +6,7 @@ namespace Test\EnemyCombat;
 
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Combat;
-use MageKnight\EnemyCombat\PhaseOne;
+use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
 use MageKnight\EnemyCombat\PhaseTwo;
 use MageKnight\Enemy\Enemy;
 
@@ -20,7 +20,7 @@ class CombatTest extends TestCase
     {
         $combat = new Combat();
         $phase_one = $combat->initiateCombat($this->getEnemy());
-        $this->assertInstanceOf(PhaseOne::class, $phase_one);
+        $this->assertInstanceOf(RangedAndSiegeAttackPhase::class, $phase_one);
     }
 
     /**

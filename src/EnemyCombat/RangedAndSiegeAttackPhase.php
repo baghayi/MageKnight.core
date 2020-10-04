@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MageKnight\EnemyCombat;
 
-class PhaseOne implements Phase
+class RangedAndSiegeAttackPhase implements Phase
 {
     public function execute(): Phase
     {

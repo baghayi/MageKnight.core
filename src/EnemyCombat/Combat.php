@@ -13,6 +13,6 @@ class Combat
     {
         if ($enemy->isDoubleFortified())
             return new PhaseTwo();
-        return new PhaseOne();
+        return new RangedAndSiegeAttackPhase();
     }
 }
