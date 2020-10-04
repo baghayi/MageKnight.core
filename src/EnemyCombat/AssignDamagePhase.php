@@ -8,6 +8,7 @@ class AssignDamagePhase implements Phase
 {
     public function execute(): Phase
     {
+        return new AttackPhase();
     }
 
     public function title(): string
