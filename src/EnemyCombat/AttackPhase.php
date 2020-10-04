@@ -9,6 +9,7 @@ class AttackPhase implements Phase
 
     public function execute(): Outcomes
     {
+        return new Outcomes();
     }
 
     public function title(): string
