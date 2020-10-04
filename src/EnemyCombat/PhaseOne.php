@@ -10,4 +10,9 @@ class PhaseOne implements Phase
     {
         return new PhaseTwo();
     }
+
+    public function title(): string
+    {
+        return 'Range and Siege Attack Phase';
+    }
 }

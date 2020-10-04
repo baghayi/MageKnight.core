@@ -10,4 +10,9 @@ class PhaseTwo implements Phase
     {
         return new PhaseOne();
     }
+
+    public function title(): string
+    {
+        return 'Block Phase';
+    }
 }

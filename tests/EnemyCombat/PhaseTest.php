@@ -32,6 +32,16 @@ class PhaseTest extends TestCase
         $this->assertInstanceof(Outcomes::class, $outcomes);
     }
 
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\Phase::title
+    */
+    public function human_friendly_phase_title()
+    {
+        $phase = $this->getPhaseWithHumanFriendlyTitle();
+        $this->assertSame('Range and Siege Attack Phase', $phase->title());
+    }
+
     private function getPhaseWhichLeadsToAnotherPhase(): Phase
     {
         $phase = $this->createMock(Phase::class);
@@ -47,6 +57,15 @@ class PhaseTest extends TestCase
         $phase->expects($this->once())
             ->method('execute')
             ->willReturn($this->createStub(Outcomes::class));
+        return $phase;
+    }
+
+    private function getPhaseWithHumanFriendlyTitle(): Phase
+    {
+        $phase = $this->createMock(Phase::class);
+        $phase->expects($this->once())
+            ->method('title')
+            ->willReturn('Range and Siege Attack Phase');
         return $phase;
     }
 }
