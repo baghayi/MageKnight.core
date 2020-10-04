@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MageKnight\EnemyCombat;
 
-interface Phase
+class Outcomes
 {
-    public function execute(): Phase|Outcomes;
 }

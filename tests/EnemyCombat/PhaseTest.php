@@ -6,6 +6,7 @@ namespace Test\MageKnight\EnemyCombat;
 
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Phase;
+use MageKnight\EnemyCombat\Outcomes;
 
 class PhaseTest extends TestCase
 {
@@ -20,12 +21,32 @@ class PhaseTest extends TestCase
         $this->assertInstanceof(Phase::class, $new_phase);
     }
 
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\Phase::execute
+    */
+    public function a_phase_may_end_with_outcomes()
+    {
+        $phase = $this->getPhaseWhichEndsWithOutcomes();
+        $outcomes = $phase->execute();
+        $this->assertInstanceof(Outcomes::class, $outcomes);
+    }
+
     private function getPhaseWhichLeadsToAnotherPhase(): Phase
     {
         $phase = $this->createMock(Phase::class);
         $phase->expects($this->once())
             ->method('execute')
             ->willReturn($this->createStub(Phase::class));
+        return $phase;
+    }
+
+    private function getPhaseWhichEndsWithOutcomes(): Phase
+    {
+        $phase = $this->createMock(Phase::class);
+        $phase->expects($this->once())
+            ->method('execute')
+            ->willReturn($this->createStub(Outcomes::class));
         return $phase;
     }
 }
