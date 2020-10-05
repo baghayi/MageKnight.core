@@ -18,7 +18,7 @@ class BlockPhaseTest extends TestCase
     public function after_blocking_or_not_blocking_we_will_go_to_phase_three()
     {
         $phase = new BlockPhase();
-        $phase_three = $phase->execute();
-        $this->assertInstanceof(AssignDamagePhase::class, $phase_three);
+        $result = $phase->execute();
+        $this->assertInstanceof(AssignDamagePhase::class, $result->phase);
     }
 }

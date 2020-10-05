@@ -17,7 +17,7 @@ class AssignDamagePhaseTest extends TestCase
     public function after_this_phase_there_is_an_attack_phase()
     {
         $phase = new AssignDamagePhase();
-        $attack_phase = $phase->execute();
-        $this->assertInstanceof(AttackPhase::class, $attack_phase);
+        $result = $phase->execute();
+        $this->assertInstanceof(AttackPhase::class, $result->phase);
     }
 }

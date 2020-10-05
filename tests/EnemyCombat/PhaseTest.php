@@ -6,6 +6,7 @@ namespace Test\MageKnight\EnemyCombat;
 
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Phase;
+use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;
 
 class PhaseTest extends TestCase
@@ -17,8 +18,8 @@ class PhaseTest extends TestCase
     public function each_phase_may_lead_to_another_phase()
     {
         $phase = $this->getPhaseWhichLeadsToAnotherPhase();
-        $new_phase = $phase->execute();
-        $this->assertInstanceof(Phase::class, $new_phase);
+        $result = $phase->execute();
+        $this->assertInstanceof(Phase::class, $result->phase);
     }
 
     /**
@@ -28,8 +29,8 @@ class PhaseTest extends TestCase
     public function a_phase_may_end_with_outcomes()
     {
         $phase = $this->getPhaseWhichEndsWithOutcomes();
-        $outcomes = $phase->execute();
-        $this->assertInstanceof(Outcomes::class, $outcomes);
+        $result = $phase->execute();
+        $this->assertInstanceof(Outcomes::class, $result->outcomes);
     }
 
     /**
@@ -42,21 +43,50 @@ class PhaseTest extends TestCase
         $this->assertSame('Range and Siege Attack Phase', $phase->title());
     }
 
-    private function getPhaseWhichLeadsToAnotherPhase(): Phase
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\Phase::execute
+    */
+    public function phase_may_result_in_both_another_phase_and_outcomes()
     {
+        $expected_result = new Result(
+            outcomes: new Outcomes(),
+            phase: $this->createStub(Phase::class)
+        );
+
         $phase = $this->createMock(Phase::class);
         $phase->expects($this->once())
             ->method('execute')
-            ->willReturn($this->createStub(Phase::class));
+            ->willReturn($expected_result);
+
+        $result = $phase->execute();
+        $this->assertInstanceof(Outcomes::class, $result->outcomes);
+        $this->assertInstanceof(Phase::class, $result->phase);
+    }
+
+    private function getPhaseWhichLeadsToAnotherPhase(): Phase
+    {
+        $result = new Result(
+            phase: $this->createStub(Phase::class)
+        );
+
+        $phase = $this->createMock(Phase::class);
+        $phase->expects($this->once())
+            ->method('execute')
+            ->willReturn($result);
         return $phase;
     }
 
     private function getPhaseWhichEndsWithOutcomes(): Phase
     {
+        $result = new Result(
+            outcomes: $this->createStub(Outcomes::class)
+        );
+
         $phase = $this->createMock(Phase::class);
         $phase->expects($this->once())
             ->method('execute')
-            ->willReturn($this->createStub(Outcomes::class));
+            ->willReturn($result);
         return $phase;
     }
 

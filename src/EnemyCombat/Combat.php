@@ -12,10 +12,15 @@ class Combat
     public function initiateCombat(Enemy $enemy): Outcomes
     {
         $phase = new RangedAndSiegeAttackPhase();
+        $outcomes = null;
+
         do {
-            $phase = $phase->execute();
-            if ($phase instanceof Outcomes)
-                return $phase;
-        } while($phase instanceof Phase);
+            $result = $phase->execute();
+            if ($result->outcomes instanceof Outcomes)
+                $outcomes = $result->outcomes;
+            $phase = $result->phase;
+        } while($result->phase instanceof Phase);
+
+        return $outcomes;
     }
 }

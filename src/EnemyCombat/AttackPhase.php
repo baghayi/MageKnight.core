@@ -7,9 +7,9 @@ namespace MageKnight\EnemyCombat;
 class AttackPhase implements Phase
 {
 
-    public function execute(): Outcomes
+    public function execute(): Result
     {
-        return new Outcomes();
+        return new Result(outcomes: new Outcomes());
     }
 
     public function title(): string

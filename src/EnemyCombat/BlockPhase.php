@@ -6,9 +6,9 @@ namespace MageKnight\EnemyCombat;
 
 class BlockPhase implements Phase
 {
-    public function execute(): Phase
+    public function execute(): Result
     {
-        return new AssignDamagePhase();
+        return new Result(phase: new AssignDamagePhase());
     }
 
     public function title(): string

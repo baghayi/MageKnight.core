@@ -18,7 +18,7 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
     public function double_fortified_enemies_cannot_be_defeated_at_this_phase()
     {
         $phase = new RangedAndSiegeAttackPhase();
-        $phase_two = $phase->execute();
-        $this->assertInstanceof(BlockPhase::class, $phase_two);
+        $result = $phase->execute();
+        $this->assertInstanceof(BlockPhase::class, $result->phase);
     }
 }

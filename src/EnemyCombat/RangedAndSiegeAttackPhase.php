@@ -6,9 +6,9 @@ namespace MageKnight\EnemyCombat;
 
 class RangedAndSiegeAttackPhase implements Phase
 {
-    public function execute(): Phase
+    public function execute(): Result
     {
-        return new BlockPhase();
+        return new Result(phase: new BlockPhase());
     }
 
     public function title(): string
