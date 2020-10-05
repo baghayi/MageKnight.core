@@ -49,16 +49,7 @@ class PhaseTest extends TestCase
     */
     public function phase_may_result_in_both_another_phase_and_outcomes()
     {
-        $expected_result = new Result(
-            outcomes: new Outcomes(),
-            phase: $this->createStub(Phase::class)
-        );
-
-        $phase = $this->createMock(Phase::class);
-        $phase->expects($this->once())
-            ->method('execute')
-            ->willReturn($expected_result);
-
+        $phase = $this->getPhaseWithBothNewPhaseAndOutcomes();
         $result = $phase->execute();
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
         $this->assertInstanceof(Phase::class, $result->phase);
@@ -96,6 +87,21 @@ class PhaseTest extends TestCase
         $phase->expects($this->once())
             ->method('title')
             ->willReturn('Range and Siege Attack Phase');
+        return $phase;
+    }
+
+    private function getPhaseWithBothNewPhaseAndOutcomes(): phase
+    {
+        $expected_result = new Result(
+            outcomes: new Outcomes(),
+            phase: $this->createStub(Phase::class)
+        );
+
+        $phase = $this->createMock(Phase::class);
+        $phase->expects($this->once())
+            ->method('execute')
+            ->willReturn($expected_result);
+
         return $phase;
     }
 }
