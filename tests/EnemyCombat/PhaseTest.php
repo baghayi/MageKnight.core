@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Phase;
 use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;
+use MageKnight\Enemy\Enemy;
 
 class PhaseTest extends TestCase
 {
@@ -18,7 +19,7 @@ class PhaseTest extends TestCase
     public function each_phase_may_lead_to_another_phase()
     {
         $phase = $this->getPhaseWhichLeadsToAnotherPhase();
-        $result = $phase->execute();
+        $result = $phase->execute($this->getEnemy());
         $this->assertInstanceof(Phase::class, $result->phase);
     }
 
@@ -29,7 +30,7 @@ class PhaseTest extends TestCase
     public function a_phase_may_end_with_outcomes()
     {
         $phase = $this->getPhaseWhichEndsWithOutcomes();
-        $result = $phase->execute();
+        $result = $phase->execute($this->getEnemy());
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
     }
 
@@ -50,7 +51,7 @@ class PhaseTest extends TestCase
     public function phase_may_result_in_both_another_phase_and_outcomes()
     {
         $phase = $this->getPhaseWithBothNewPhaseAndOutcomes();
-        $result = $phase->execute();
+        $result = $phase->execute($this->getEnemy());
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
         $this->assertInstanceof(Phase::class, $result->phase);
     }
@@ -103,5 +104,10 @@ class PhaseTest extends TestCase
             ->willReturn($expected_result);
 
         return $phase;
+    }
+
+    private function getEnemy(): Enemy
+    {
+        return $this->createStub(Enemy::class);
     }
 }

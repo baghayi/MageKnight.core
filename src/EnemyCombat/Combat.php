@@ -15,7 +15,7 @@ class Combat
         $outcomes = null;
 
         do {
-            $result = $phase->execute();
+            $result = $phase->execute($enemy);
             if ($result->outcomes instanceof Outcomes)
                 $outcomes = $result->outcomes;
             $phase = $result->phase;

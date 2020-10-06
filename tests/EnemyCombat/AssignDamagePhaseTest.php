@@ -7,6 +7,7 @@ namespace Test\MageKnight\EnemyCombat;
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\AssignDamagePhase;
 use MageKnight\EnemyCombat\AttackPhase;
+use MageKnight\Enemy\Enemy;
 
 class AssignDamagePhaseTest extends TestCase
 {
@@ -17,7 +18,12 @@ class AssignDamagePhaseTest extends TestCase
     public function after_this_phase_there_is_an_attack_phase()
     {
         $phase = new AssignDamagePhase();
-        $result = $phase->execute();
+        $result = $phase->execute($this->getEnemy());
         $this->assertInstanceof(AttackPhase::class, $result->phase);
+    }
+
+    private function getEnemy(): Enemy
+    {
+        return $this->createStub(Enemy::class);
     }
 }
