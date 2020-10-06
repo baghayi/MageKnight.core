@@ -31,7 +31,7 @@ class BlockPhaseTest extends TestCase
     public function non_blocked_enemies_deals_damage()
     {
         $phase = new BlockPhase();
-        $result = $phase->execute($this->getEnemyWithThreeAttackPoint());
+        $result = $phase->execute($this->getEnemyWithThreeAttackHits());
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
         $this->assertEquals(3, $result->outcomes['hits']);
     }
@@ -41,11 +41,11 @@ class BlockPhaseTest extends TestCase
         return $this->createStub(Enemy::class);
     }
 
-    private function getEnemyWithThreeAttackPoint(): Enemy
+    private function getEnemyWithThreeAttackHits(): Enemy
     {
         $enemy = $this->createMock(Enemy::class);
         $enemy->expects($this->any())
-            ->method('attackPoint')
+            ->method('attackHits')
             ->willReturn(3);
         return $enemy;
     }

@@ -13,7 +13,7 @@ class BlockPhase implements Phase
         return new Result(
             phase: new AssignDamagePhase(),
             outcomes: new Outcomes([
-                'hits' => $enemy->attackPoint()
+                'hits' => $enemy->attackHits()
             ])
         );
     }
