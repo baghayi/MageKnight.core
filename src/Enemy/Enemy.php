@@ -8,4 +8,5 @@ interface Enemy
 {
     public function isDoubleFortified(): bool;
     public function attackHits(): int;
+    public function strength(): int;
 }

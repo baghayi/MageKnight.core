@@ -6,11 +6,11 @@ namespace MageKnight\EnemyCombat;
 
 use MageKnight\Player\Action;
 
-class Block implements Action
+class SiegeAttack implements Action
 {
     public function __construct(
         private int $quantity
-    ){
+    ) {
     }
 
     public function quantity(): int
