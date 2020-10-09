@@ -9,7 +9,7 @@ use MageKnight\Enemy\Enemy;
 class AttackPhase implements Phase
 {
 
-    public function execute(Enemy $enemy): Result
+    public function execute(Enemy $enemy, Block $action = null): Result
     {
         return new Result(outcomes: new Outcomes());
     }

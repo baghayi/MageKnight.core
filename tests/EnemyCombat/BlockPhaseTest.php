@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\BlockPhase;
 use MageKnight\EnemyCombat\AssignDamagePhase;
 use MageKnight\EnemyCombat\Outcomes;
+use MageKnight\EnemyCombat\Block;
 use MageKnight\Enemy\Enemy;
 
 class BlockPhaseTest extends TestCase
@@ -34,6 +35,20 @@ class BlockPhaseTest extends TestCase
         $result = $phase->execute($this->getEnemyWithThreeAttackHits());
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
         $this->assertEquals(3, $result->outcomes['hits']);
+    }
+
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\BlockPhase::execute
+    */
+    public function avoid_damage_by_blocking_enemies()
+    {
+        $phase = new BlockPhase();
+        $result = $phase->execute(
+            $this->getEnemyWithThreeAttackHits(),
+            new Block(3)
+        );
+        $this->assertNull($result->outcomes);
     }
 
     private function getEnemy(): Enemy

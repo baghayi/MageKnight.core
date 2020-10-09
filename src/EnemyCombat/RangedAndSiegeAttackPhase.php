@@ -8,7 +8,7 @@ use MageKnight\Enemy\Enemy;
 
 class RangedAndSiegeAttackPhase implements Phase
 {
-    public function execute(Enemy $enemy): Result
+    public function execute(Enemy $enemy, Block $block = null): Result
     {
         return new Result(phase: new BlockPhase());
     }
