@@ -7,6 +7,7 @@ namespace Test\MageKnight\EnemyCombat;
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
 use MageKnight\EnemyCombat\BlockPhase;
+use MageKnight\EnemyCombat\Phase;
 use MageKnight\Enemy\Enemy;
 use MageKnight\EnemyCombat\SiegeAttack;
 use MageKnight\EnemyCombat\RangedAttack;
@@ -69,6 +70,20 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $this->assertNull($result->phase);
     }
 
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    */
+    public function cannot_defeat_fortified_enemies_with_ranged_attack()
+    {
+        $phase = new RangedAndSiegeAttackPhase();
+        $result = $phase->execute(
+            $this->getFortifiedEnemy(),
+            new RangedAttack(3)
+        );
+        $this->assertInstanceof(Phase::class, $result->phase);
+    }
+
     private function getEnemy(): Enemy
     {
         return $this->createStub(Enemy::class);
@@ -92,6 +107,15 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $enemy->expects($this->any())
             ->method('fame')
             ->willReturn(4);
+        return $enemy;
+    }
+
+    private function getFortifiedEnemy(): Enemy
+    {
+        $enemy = $this->createMock(Enemy::class);
+        $enemy->expects($this->any())
+            ->method('fortified')
+            ->willReturn(true);
         return $enemy;
     }
 }
