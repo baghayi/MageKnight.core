@@ -9,6 +9,7 @@ use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
 use MageKnight\EnemyCombat\BlockPhase;
 use MageKnight\Enemy\Enemy;
 use MageKnight\EnemyCombat\SiegeAttack;
+use MageKnight\EnemyCombat\RangedAttack;
 use MageKnight\EnemyCombat\Outcomes;
 
 class RangedAndSiegeAttackPhaseTest extends TestCase
@@ -52,6 +53,20 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         );
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
         $this->assertEquals(4, $result->outcomes['fame']);
+    }
+
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    */
+    public function can_also_defeat_enemies_using_ranged_attack()
+    {
+        $phase = new RangedAndSiegeAttackPhase();
+        $result = $phase->execute(
+            $this->getEnemyWithThreeStrength(),
+            new RangedAttack(3)
+        );
+        $this->assertNull($result->phase);
     }
 
     private function getEnemy(): Enemy

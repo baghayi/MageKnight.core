@@ -24,6 +24,7 @@ class RangedAndSiegeAttackPhase implements Phase
 
     private function canDefeat(Enemy $enemy, Action $action = null): bool
     {
-        return $action instanceof SiegeAttack && $enemy->strength() <= $action->quantity();
+        return ($action instanceof SiegeAttack || $action instanceof RangedAttack) 
+            && $enemy->strength() <= $action->quantity();
     }
 }
