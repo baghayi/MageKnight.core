@@ -12,7 +12,7 @@ class RangedAndSiegeAttackPhase implements Phase
     public function execute(Enemy $enemy, Action $action = null): Result
     {
         if ($action instanceof SiegeAttack && $enemy->strength() <= $action->quantity())
-            return new Result();
+            return new Result(outcomes: new Outcomes(['fame' => $enemy->fame()]));
 
         return new Result(phase: new BlockPhase());
     }

@@ -9,6 +9,7 @@ use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
 use MageKnight\EnemyCombat\BlockPhase;
 use MageKnight\Enemy\Enemy;
 use MageKnight\EnemyCombat\SiegeAttack;
+use MageKnight\EnemyCombat\Outcomes;
 
 class RangedAndSiegeAttackPhaseTest extends TestCase
 {
@@ -38,6 +39,21 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $this->assertNull($result->phase);
     }
 
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    */
+    public function you_get_fame_by_defeating_enemy()
+    {
+        $phase = new RangedAndSiegeAttackPhase();
+        $result = $phase->execute(
+            $this->getEnemyWithThreeStrengthAndFourFame(),
+            new SiegeAttack(3)
+        );
+        $this->assertInstanceof(Outcomes::class, $result->outcomes);
+        $this->assertEquals(4, $result->outcomes['fame']);
+    }
+
     private function getEnemy(): Enemy
     {
         return $this->createStub(Enemy::class);
@@ -49,6 +65,18 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $enemy->expects($this->any())
             ->method('strength')
             ->willReturn(3);
+        return $enemy;
+    }
+
+    private function getEnemyWithThreeStrengthAndFourFame(): Enemy
+    {
+        $enemy = $this->createMock(Enemy::class);
+        $enemy->expects($this->any())
+            ->method('strength')
+            ->willReturn(3);
+        $enemy->expects($this->any())
+            ->method('fame')
+            ->willReturn(4);
         return $enemy;
     }
 }
