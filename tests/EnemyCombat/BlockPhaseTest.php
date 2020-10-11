@@ -46,7 +46,7 @@ class BlockPhaseTest extends TestCase
         $phase = new BlockPhase();
         $result = $phase->execute(
             $this->getEnemyWithThreeAttackHits(),
-            new Block(3)
+            [new Block(3)]
         );
         $this->assertNull($result->outcomes);
     }

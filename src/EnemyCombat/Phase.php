@@ -9,6 +9,6 @@ use MageKnight\Player\Action;
 
 interface Phase
 {
-    public function execute(Enemy $enemy, Action $action = null): Result;
+    public function execute(Enemy $enemy, array $actions = []): Result;
     public function title(): string;
 }

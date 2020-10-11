@@ -36,7 +36,7 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $phase = new RangedAndSiegeAttackPhase();
         $result = $phase->execute(
             $this->getEnemyWithThreeStrength(),
-            new SiegeAttack(3)
+            [new SiegeAttack(3)]
         );
         $this->assertNull($result->phase);
     }
@@ -50,7 +50,7 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $phase = new RangedAndSiegeAttackPhase();
         $result = $phase->execute(
             $this->getEnemyWithThreeStrengthAndFourFame(),
-            new SiegeAttack(3)
+            [new SiegeAttack(3)]
         );
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
         $this->assertEquals(4, $result->outcomes['fame']);
@@ -65,7 +65,7 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $phase = new RangedAndSiegeAttackPhase();
         $result = $phase->execute(
             $this->getEnemyWithThreeStrength(),
-            new RangedAttack(3)
+            [new RangedAttack(3)]
         );
         $this->assertNull($result->phase);
     }
@@ -84,7 +84,20 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $this->assertInstanceof(Phase::class, $result->phase);
     }
 
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    */
+    public function can_defeat_enemies_by_combining_siege_and_ranged_attack_together()
     {
+        $phase = new RangedAndSiegeAttackPhase();
+        $result = $phase->execute(
+            $this->getEnemyWithThreeStrengthAndFourFame(),
+            [new SiegeAttack(2), new RangedAttack(1)]
+        );
+        $this->assertEquals(4, $result->outcomes['fame']);
+    }
+
     private function getDoubleFortifiedEnemy(): Enemy
     {
         $e = $this->createMock(Enemy::class);

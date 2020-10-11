@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace MageKnight\EnemyCombat;
 
 use MageKnight\Enemy\Enemy;
-use MageKnight\Player\Action;
 
 class BlockPhase implements Phase
 {
-    public function execute(Enemy $enemy, Action $action = null): Result
+    public function execute(Enemy $enemy, array $actions = []): Result
     {
-        if ($this->canBlockEnemy($enemy, $action))
+        if ($this->canBlockEnemy($enemy, $actions[0] ?? null))
             return new Result(phase: new AssignDamagePhase());
 
         return new Result(
