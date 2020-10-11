@@ -78,8 +78,8 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
     {
         $phase = new RangedAndSiegeAttackPhase();
         $result = $phase->execute(
-            $this->getFortifiedEnemy(),
-            new RangedAttack(3)
+            $this->getFortifiedEnemyOfStrengthOne(),
+            [new RangedAttack(3)]
         );
         $this->assertInstanceof(Phase::class, $result->phase);
     }
@@ -115,12 +115,15 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         return $enemy;
     }
 
-    private function getFortifiedEnemy(): Enemy
+    private function getFortifiedEnemyOfStrengthOne(): Enemy
     {
         $enemy = $this->createMock(Enemy::class);
         $enemy->expects($this->any())
             ->method('fortified')
             ->willReturn(true);
+        $enemy->expects($this->any())
+            ->method('strength')
+            ->willReturn(1);
         return $enemy;
     }
 }
