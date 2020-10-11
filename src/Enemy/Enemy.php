@@ -10,5 +10,4 @@ interface Enemy
     public function attackHits(): int;
     public function strength(): int;
     public function fame(): int;
-    public function fortified(): bool;
 }

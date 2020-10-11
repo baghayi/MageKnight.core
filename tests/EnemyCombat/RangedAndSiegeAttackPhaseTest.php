@@ -9,6 +9,7 @@ use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
 use MageKnight\EnemyCombat\BlockPhase;
 use MageKnight\EnemyCombat\Phase;
 use MageKnight\Enemy\Enemy;
+use MageKnight\Enemy\Fortified;
 use MageKnight\EnemyCombat\SiegeAttack;
 use MageKnight\EnemyCombat\RangedAttack;
 use MageKnight\EnemyCombat\Outcomes;
@@ -130,10 +131,7 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
 
     private function getFortifiedEnemyOfStrengthOne(): Enemy
     {
-        $enemy = $this->createMock(Enemy::class);
-        $enemy->expects($this->any())
-            ->method('fortified')
-            ->willReturn(true);
+        $enemy = $this->createMock(Fortified::class);
         $enemy->expects($this->any())
             ->method('strength')
             ->willReturn(1);

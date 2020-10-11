@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MageKnight\EnemyCombat;
 
 use MageKnight\Enemy\Enemy;
+use MageKnight\Enemy\Fortified;
 use MageKnight\Player\Action;
 
 class RangedAndSiegeAttackPhase implements Phase
@@ -25,7 +26,7 @@ class RangedAndSiegeAttackPhase implements Phase
     {
         if($enemy->isDoubleFortified())
             return false;
-        if ($enemy->fortified() && !$this->haveEnoughSiegeAttack($enemy, ...$actions))
+        if ($enemy instanceof Fortified && !$this->haveEnoughSiegeAttack($enemy, ...$actions))
             return false;
         return $this->totalAttacks(...$actions) >= $enemy->strength();
     }
