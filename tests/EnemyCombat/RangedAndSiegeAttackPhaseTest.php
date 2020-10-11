@@ -23,7 +23,7 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
     public function double_fortified_enemies_cannot_be_defeated_at_this_phase()
     {
         $phase = new RangedAndSiegeAttackPhase();
-        $result = $phase->execute($this->getEnemy());
+        $result = $phase->execute($this->getDoubleFortifiedEnemy());
         $this->assertInstanceof(BlockPhase::class, $result->phase);
     }
 
@@ -84,9 +84,14 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
         $this->assertInstanceof(Phase::class, $result->phase);
     }
 
-    private function getEnemy(): Enemy
     {
-        return $this->createStub(Enemy::class);
+    private function getDoubleFortifiedEnemy(): Enemy
+    {
+        $e = $this->createMock(Enemy::class);
+        $e->expects($this->any())
+            ->method('isDoubleFortified')
+            ->willReturn(true);
+        return $e;
     }
 
     private function getEnemyWithThreeStrength(): Enemy
