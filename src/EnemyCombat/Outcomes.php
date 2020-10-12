@@ -17,6 +17,7 @@ class Outcomes implements ArrayAccess
 
     public function offsetExists($offset): bool
     {
+        return array_key_exists($offset, $this->data);
     }
 
     public function offsetGet($offset)

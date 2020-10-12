@@ -10,6 +10,7 @@ use MageKnight\EnemyCombat\AssignDamagePhase;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Block;
 use MageKnight\Enemy\Enemy;
+use MageKnight\Enemy\Swift;
 
 class BlockPhaseTest extends TestCase
 {
@@ -51,6 +52,25 @@ class BlockPhaseTest extends TestCase
         $this->assertNull($result->outcomes);
     }
 
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\BlockPhase::execute
+    */
+    public function swift_enemies_has_to_be_blocked_double_to_their_attack_hits()
+    {
+        $phase = new BlockPhase();
+        $result = $phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(3)]);
+        $this->assertEquals(3, $result->outcomes['hits'] ?? null, "Should have been hit by 3");
+
+        $phase = new BlockPhase();
+        $result = $phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(5)]);
+        $this->assertEquals(3, $result->outcomes['hits'] ?? null, "Should have been hit by 3");
+
+        $phase = new BlockPhase();
+        $result = $phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(6)]);
+        $this->assertNull($result->outcomes);
+    }
+
     private function getEnemy(): Enemy
     {
         return $this->createStub(Enemy::class);
@@ -59,6 +79,15 @@ class BlockPhaseTest extends TestCase
     private function getEnemyWithThreeAttackHits(): Enemy
     {
         $enemy = $this->createMock(Enemy::class);
+        $enemy->expects($this->any())
+            ->method('attackHits')
+            ->willReturn(3);
+        return $enemy;
+    }
+
+    private function getSwiftEnemyWithThreeAttackHits(): Enemy
+    {
+        $enemy = $this->createMock(Swift::class);
         $enemy->expects($this->any())
             ->method('attackHits')
             ->willReturn(3);
