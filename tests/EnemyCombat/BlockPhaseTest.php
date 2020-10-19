@@ -11,6 +11,7 @@ use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Block;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
+use MageKnight\Enemy\Brutal;
 
 class BlockPhaseTest extends TestCase
 {
@@ -71,6 +72,17 @@ class BlockPhaseTest extends TestCase
         $this->assertNull($result->outcomes);
     }
 
+    /**
+    * @test
+    * @covers \MageKnight\EnemyCombat\BlockPhase::execute
+    */
+    public function unblocked_brutal_enemies_hit_twice_their_attack_hits()
+    {
+        $phase = new BlockPhase();
+        $result = $phase->execute($this->getBrutalEnemyWithThreeAttackHits(), []);
+        $this->assertEquals(6, $result->outcomes['hits'] ?? null, "Should have been hit by 6");
+    }
+
     private function getEnemy(): Enemy
     {
         return $this->createStub(Enemy::class);
@@ -88,6 +100,15 @@ class BlockPhaseTest extends TestCase
     private function getSwiftEnemyWithThreeAttackHits(): Enemy
     {
         $enemy = $this->createMock(Swift::class);
+        $enemy->expects($this->any())
+            ->method('attackHits')
+            ->willReturn(3);
+        return $enemy;
+    }
+
+    private function getBrutalEnemyWithThreeAttackHits(): Enemy
+    {
+        $enemy = $this->createMock(Brutal::class);
         $enemy->expects($this->any())
             ->method('attackHits')
             ->willReturn(3);

@@ -6,6 +6,7 @@ namespace MageKnight\EnemyCombat;
 
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
+use MageKnight\Enemy\Brutal;
 
 class BlockPhase implements Phase
 {
@@ -17,7 +18,7 @@ class BlockPhase implements Phase
         return new Result(
             phase: new AssignDamagePhase(),
             outcomes: new Outcomes([
-                'hits' => $enemy->attackHits()
+                'hits' => $this->getEnemyAttackHits($enemy),
             ])
         );
     }
@@ -35,5 +36,10 @@ class BlockPhase implements Phase
     private function totalEnemyAttackHits(Enemy $enemy): int
     {
         return ($enemy instanceof Swift) ? $enemy->attackHits() * 2 : $enemy->attackHits();
+    }
+
+    private function getEnemyAttackHits(Enemy $enemy): int
+    {
+        return $enemy instanceof Brutal ? $enemy->attackHits() * 2 : $enemy->attackHits();
     }
 }
