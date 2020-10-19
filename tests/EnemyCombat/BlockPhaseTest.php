@@ -83,6 +83,14 @@ class BlockPhaseTest extends TestCase
         $this->assertEquals(6, $result->outcomes['hits'] ?? null, "Should have been hit by 6");
     }
 
+    /**
+    * @test
+    */
+    public function fire_attack_enemies_could_be_blocked_by_ice_blocks_efficiently()
+    {
+        $this->markTestSkipped();
+    }
+
     private function getEnemy(): Enemy
     {
         return $this->createStub(Enemy::class);
