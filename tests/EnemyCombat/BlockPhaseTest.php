@@ -91,6 +91,14 @@ class BlockPhaseTest extends TestCase
         $this->markTestSkipped();
     }
 
+    /**
+    * @test
+    */
+    public function fire_attack_enemies_could_be_blocked_by_cold_fire_blocks_efficiently()
+    {
+        $this->markTestSkipped();
+    }
+
     private function getEnemy(): Enemy
     {
         return $this->createStub(Enemy::class);
