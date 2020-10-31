@@ -98,6 +98,21 @@ class BlockPhaseTest extends TestCase
 
     /**
     * @test
+    * @covers \MageKnight\EnemyCombat\BlockPhase::execute
+    */
+    public function total_blocks_are_halved_when_blocking_fire_attack_enemies_with_normal_block()
+    {
+        $phase = new BlockPhase();
+        $result = $phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new Block(6)]);
+        $this->assertNull($result->outcomes, "Should not get any hits");
+
+        $phase = new BlockPhase();
+        $result = $phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new Block(5)]);
+        $this->assertNotNull($result->outcomes, "We get hits!");
+    }
+
+    /**
+    * @test
     */
     public function fire_attack_enemies_could_be_blocked_by_cold_fire_blocks_efficiently()
     {
