@@ -17,6 +17,12 @@ use MageKnight\Enemy\FireAttack;
 
 class BlockPhaseTest extends TestCase
 {
+    private BlockPhase $phase;
+
+    public function setUp(): void
+    {
+        $this->phase = new BlockPhase();
+    }
 
     /**
     * @test
@@ -24,8 +30,7 @@ class BlockPhaseTest extends TestCase
     */
     public function after_blocking_or_not_blocking_we_will_go_to_phase_three()
     {
-        $phase = new BlockPhase();
-        $result = $phase->execute($this->getEnemy());
+        $result = $this->phase->execute($this->getEnemy());
         $this->assertInstanceof(AssignDamagePhase::class, $result->phase);
     }
 
@@ -35,8 +40,7 @@ class BlockPhaseTest extends TestCase
     */
     public function non_blocked_enemies_deals_damage()
     {
-        $phase = new BlockPhase();
-        $result = $phase->execute($this->getEnemyWithThreeAttackHits());
+        $result = $this->phase->execute($this->getEnemyWithThreeAttackHits());
         $this->assertInstanceof(Outcomes::class, $result->outcomes);
         $this->assertEquals(3, $result->outcomes['hits']);
     }
@@ -47,8 +51,7 @@ class BlockPhaseTest extends TestCase
     */
     public function avoid_damage_by_blocking_enemies()
     {
-        $phase = new BlockPhase();
-        $result = $phase->execute(
+        $result = $this->phase->execute(
             $this->getEnemyWithThreeAttackHits(),
             [new Block(3)]
         );
@@ -61,16 +64,13 @@ class BlockPhaseTest extends TestCase
     */
     public function swift_enemies_has_to_be_blocked_double_to_their_attack_hits()
     {
-        $phase = new BlockPhase();
-        $result = $phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(3)]);
+        $result = $this->phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(3)]);
         $this->assertEquals(3, $result->outcomes['hits'] ?? null, "Should have been hit by 3");
 
-        $phase = new BlockPhase();
-        $result = $phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(5)]);
+        $result = $this->phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(5)]);
         $this->assertEquals(3, $result->outcomes['hits'] ?? null, "Should have been hit by 3");
 
-        $phase = new BlockPhase();
-        $result = $phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(6)]);
+        $result = $this->phase->execute( $this->getSwiftEnemyWithThreeAttackHits(), [new Block(6)]);
         $this->assertNull($result->outcomes);
     }
 
@@ -80,8 +80,7 @@ class BlockPhaseTest extends TestCase
     */
     public function unblocked_brutal_enemies_hit_twice_their_attack_hits()
     {
-        $phase = new BlockPhase();
-        $result = $phase->execute($this->getBrutalEnemyWithThreeAttackHits(), []);
+        $result = $this->phase->execute($this->getBrutalEnemyWithThreeAttackHits(), []);
         $this->assertEquals(6, $result->outcomes['hits'] ?? null, "Should have been hit by 6");
     }
 
@@ -91,8 +90,7 @@ class BlockPhaseTest extends TestCase
     */
     public function fire_attack_enemies_could_be_blocked_by_ice_blocks_efficiently()
     {
-        $phase = new BlockPhase();
-        $result = $phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new IceBlock(3)]);
+        $result = $this->phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new IceBlock(3)]);
         $this->assertNull($result->outcomes, "Should not get any hits");
     }
 
@@ -102,12 +100,10 @@ class BlockPhaseTest extends TestCase
     */
     public function total_blocks_are_halved_when_blocking_fire_attack_enemies_with_normal_block()
     {
-        $phase = new BlockPhase();
-        $result = $phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new Block(6)]);
+        $result = $this->phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new Block(6)]);
         $this->assertNull($result->outcomes, "Should not get any hits");
 
-        $phase = new BlockPhase();
-        $result = $phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new Block(5)]);
+        $result = $this->phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new Block(5)]);
         $this->assertNotNull($result->outcomes, "We get hits!");
     }
 
