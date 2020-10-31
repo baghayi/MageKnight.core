@@ -9,9 +9,11 @@ use MageKnight\EnemyCombat\BlockPhase;
 use MageKnight\EnemyCombat\AssignDamagePhase;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Block;
+use MageKnight\EnemyCombat\IceBlock;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
+use MageKnight\Enemy\FireAttack;
 
 class BlockPhaseTest extends TestCase
 {
@@ -85,10 +87,13 @@ class BlockPhaseTest extends TestCase
 
     /**
     * @test
+    * @covers \MageKnight\EnemyCombat\BlockPhase::execute
     */
     public function fire_attack_enemies_could_be_blocked_by_ice_blocks_efficiently()
     {
-        $this->markTestSkipped();
+        $phase = new BlockPhase();
+        $result = $phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new IceBlock(3)]);
+        $this->assertNull($result->outcomes, "Should not get any hits");
     }
 
     /**
@@ -128,6 +133,15 @@ class BlockPhaseTest extends TestCase
         $enemy->expects($this->any())
             ->method('attackHits')
             ->willReturn(3);
+        return $enemy;
+    }
+
+    private function getFireAttackEnemy(int $attack_hits): Enemy
+    {
+        $enemy = $this->createMock(FireAttack::class);
+        $enemy->expects($this->any())
+            ->method('attackHits')
+            ->willReturn($attack_hits);
         return $enemy;
     }
 }
