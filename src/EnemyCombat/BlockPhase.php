@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MageKnight\EnemyCombat;
 
+use MageKnight\Player\Action;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
@@ -29,7 +30,7 @@ class BlockPhase implements Phase
         return 'Block Phase';
     }
 
-    private function canBlockEnemy(Enemy $enemy, Block $action = null): bool
+    private function canBlockEnemy(Enemy $enemy, Action $action = null): bool
     {
         return $action instanceof Block && $this->totalBlocks($enemy, $action) >= $this->totalEnemyAttackHits($enemy);
     }
