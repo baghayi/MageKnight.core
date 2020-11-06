@@ -8,7 +8,7 @@ use ArrayAccess;
 
 class Outcomes implements ArrayAccess
 {
-    public array $data = [];
+    private array $data = [];
 
     public function __construct(array $data = [])
     {
