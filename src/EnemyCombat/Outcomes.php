@@ -22,7 +22,7 @@ class Outcomes implements ArrayAccess
 
     public function offsetGet($offset)
     {
-        return $this->data[$offset];
+        return $this->data[$offset] ?? null;
     }
 
     public function offsetSet($offset, $value): void
