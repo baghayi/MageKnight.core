@@ -9,18 +9,18 @@ use MageKnight\Enemy\EnemyGroup;
 
 class Combat
 {
-    public function initiateCombat(Enemy $enemy): Outcomes
+    public function initiateCombat(Enemy $enemy, array $actions = []): Outcomes
     {
         $phase = new RangedAndSiegeAttackPhase();
-        $outcomes = null;
+        $outcomes = [];
 
         do {
-            $result = $phase->execute($enemy);
+            $result = $phase->execute($enemy, $actions);
             if ($result->outcomes instanceof Outcomes)
-                $outcomes = $result->outcomes;
+                $outcomes = array_merge($outcomes, $result->outcomes->data);
             $phase = $result->phase;
         } while($result->phase instanceof Phase);
 
-        return $outcomes;
+        return new Outcomes($outcomes);
     }
 }
