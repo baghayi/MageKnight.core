@@ -32,4 +32,9 @@ class Outcomes implements ArrayAccess
     public function offsetUnset( $offset): void
     {
     }
+
+    public function merge(Outcomes $outcomes): Outcomes
+    {
+        return new Outcomes(array_merge($this->data, $outcomes->data));
+    }
 }
