@@ -10,6 +10,7 @@ use MageKnight\EnemyCombat\AssignDamagePhase;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Block;
 use MageKnight\EnemyCombat\IceBlock;
+use MageKnight\EnemyCombat\ColdFireBlock;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
@@ -109,10 +110,12 @@ class BlockPhaseTest extends TestCase
 
     /**
     * @test
+    * @covers \MageKnight\EnemyCombat\BlockPhase::execute
     */
     public function fire_attack_enemies_could_be_blocked_by_cold_fire_blocks_efficiently()
     {
-        $this->markTestSkipped();
+        $result = $this->phase->execute($this->getFireAttackEnemy(attack_hits: 3), [new ColdFireBlock(3)]);
+        $this->assertNull($result->outcomes, "Should not get any hits");
     }
 
     private function getEnemy(): Enemy
