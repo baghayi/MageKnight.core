@@ -2,13 +2,19 @@
 
 declare(strict_types=1);
 
-namespace MageKnight\EnemyCombat;
+namespace MageKnight\EnemyCombat\Phase;
 
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Fortified;
 use MageKnight\Player\Action;
+use MageKnight\EnemyCombat\Phase as CombatPhase;
+use MageKnight\EnemyCombat\Result;
+use MageKnight\EnemyCombat\Outcomes;
+use MageKnight\EnemyCombat\BlockPhase;
+use MageKnight\EnemyCombat\SiegeAttack;
+use MageKnight\EnemyCombat\RangedAttack;
 
-class RangedAndSiegeAttackPhase implements Phase
+class RangedAndSiegeAttack implements CombatPhase
 {
     public function execute(Enemy $enemy, array $actions = []): Result
     {

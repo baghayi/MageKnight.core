@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Test\MageKnight\EnemyCombat;
+namespace Test\MageKnight\EnemyCombat\Phase;
 
 use PHPUnit\Framework\TestCase;
-use MageKnight\EnemyCombat\RangedAndSiegeAttackPhase;
+use MageKnight\EnemyCombat\Phase\RangedAndSiegeAttack;
 use MageKnight\EnemyCombat\BlockPhase;
 use MageKnight\EnemyCombat\Phase;
 use MageKnight\Enemy\Enemy;
@@ -14,27 +14,27 @@ use MageKnight\EnemyCombat\SiegeAttack;
 use MageKnight\EnemyCombat\RangedAttack;
 use MageKnight\EnemyCombat\Outcomes;
 
-class RangedAndSiegeAttackPhaseTest extends TestCase
+class RangedAndSiegeAttackTest extends TestCase
 {
 
     /**
     * @test
-    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    * @covers \MageKnight\EnemyCombat\Phase\RangedAndSiegeAttack::execute
     */
     public function double_fortified_enemies_cannot_be_defeated_at_this_phase()
     {
-        $phase = new RangedAndSiegeAttackPhase();
+        $phase = new RangedAndSiegeAttack();
         $result = $phase->execute($this->getDoubleFortifiedEnemy());
         $this->assertInstanceof(BlockPhase::class, $result->phase);
     }
 
     /**
     * @test
-    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    * @covers \MageKnight\EnemyCombat\Phase\RangedAndSiegeAttack::execute
     */
     public function skip_next_phases_by_defeating_enemies_using_siege_attack()
     {
-        $phase = new RangedAndSiegeAttackPhase();
+        $phase = new RangedAndSiegeAttack();
         $result = $phase->execute(
             $this->getEnemyWithThreeStrength(),
             [new SiegeAttack(3)]
@@ -44,11 +44,11 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
 
     /**
     * @test
-    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    * @covers \MageKnight\EnemyCombat\Phase\RangedAndSiegeAttack::execute
     */
     public function you_get_fame_by_defeating_enemy()
     {
-        $phase = new RangedAndSiegeAttackPhase();
+        $phase = new RangedAndSiegeAttack();
         $result = $phase->execute(
             $this->getEnemyWithThreeStrengthAndFourFame(),
             [new SiegeAttack(3)]
@@ -59,11 +59,11 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
 
     /**
     * @test
-    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    * @covers \MageKnight\EnemyCombat\Phase\RangedAndSiegeAttack::execute
     */
     public function can_also_defeat_enemies_using_ranged_attack()
     {
-        $phase = new RangedAndSiegeAttackPhase();
+        $phase = new RangedAndSiegeAttack();
         $result = $phase->execute(
             $this->getEnemyWithThreeStrength(),
             [new RangedAttack(3)]
@@ -73,11 +73,11 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
 
     /**
     * @test
-    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    * @covers \MageKnight\EnemyCombat\Phase\RangedAndSiegeAttack::execute
     */
     public function cannot_defeat_fortified_enemies_with_ranged_attack()
     {
-        $phase = new RangedAndSiegeAttackPhase();
+        $phase = new RangedAndSiegeAttack();
         $result = $phase->execute(
             $this->getFortifiedEnemyOfStrengthOne(),
             [new RangedAttack(3)]
@@ -87,11 +87,11 @@ class RangedAndSiegeAttackPhaseTest extends TestCase
 
     /**
     * @test
-    * @covers \MageKnight\EnemyCombat\RangedAndSiegeAttackPhase::execute
+    * @covers \MageKnight\EnemyCombat\Phase\RangedAndSiegeAttack::execute
     */
     public function can_defeat_enemies_by_combining_siege_and_ranged_attack_together()
     {
-        $phase = new RangedAndSiegeAttackPhase();
+        $phase = new RangedAndSiegeAttack();
         $result = $phase->execute(
             $this->getEnemyWithThreeStrengthAndFourFame(),
             [new SiegeAttack(2), new RangedAttack(1)]

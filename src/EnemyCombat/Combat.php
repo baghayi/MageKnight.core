@@ -11,7 +11,7 @@ class Combat
 {
     public function initiateCombat(Enemy $enemy, array $actions = []): Outcomes
     {
-        $phase = new RangedAndSiegeAttackPhase();
+        $phase = new Phase\RangedAndSiegeAttack();
         $outcomes = new Outcomes;
 
         do {
