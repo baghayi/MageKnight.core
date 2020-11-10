@@ -14,17 +14,17 @@ use MageKnight\EnemyCombat\Block as BlockAction;
 use MageKnight\EnemyCombat\IceBlock;
 use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;
-use MageKnight\EnemyCombat\AssignDamagePhase;
+use MageKnight\EnemyCombat\Phase\AssignDamage;
 
 class Block implements Phase
 {
     public function execute(Enemy $enemy, array $actions = []): Result
     {
         if ($this->canBlockEnemy($enemy, $actions[0] ?? null))
-            return new Result(phase: new AssignDamagePhase());
+            return new Result(phase: new AssignDamage());
 
         return new Result(
-            phase: new AssignDamagePhase(),
+            phase: new AssignDamage(),
             outcomes: new Outcomes([
                 'hits' => $this->getEnemyAttackHits($enemy),
             ])

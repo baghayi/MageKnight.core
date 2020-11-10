@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
-namespace MageKnight\EnemyCombat;
+namespace MageKnight\EnemyCombat\Phase;
 
 use MageKnight\Enemy\Enemy;
+use MageKnight\EnemyCombat\Phase;
+use MageKnight\EnemyCombat\Result;
+use MageKnight\EnemyCombat\AttackPhase;
 
-class AssignDamagePhase implements Phase
+class AssignDamage implements Phase
 {
     public function execute(Enemy $enemy, array $actions = []): Result
     {

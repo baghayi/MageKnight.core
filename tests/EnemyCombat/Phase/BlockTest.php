@@ -6,7 +6,7 @@ namespace Test\MageKnight\EnemyCombat\Phase;
 
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Phase\Block as BlockPhase;
-use MageKnight\EnemyCombat\AssignDamagePhase;
+use MageKnight\EnemyCombat\Phase\AssignDamage;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Block;
 use MageKnight\EnemyCombat\IceBlock;
@@ -32,7 +32,7 @@ class BlockTest extends TestCase
     public function after_blocking_or_not_blocking_we_will_go_to_phase_three()
     {
         $result = $this->phase->execute($this->getEnemy());
-        $this->assertInstanceof(AssignDamagePhase::class, $result->phase);
+        $this->assertInstanceof(AssignDamage::class, $result->phase);
     }
 
     /**
