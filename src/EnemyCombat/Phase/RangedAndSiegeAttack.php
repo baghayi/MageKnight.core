@@ -10,7 +10,7 @@ use MageKnight\Player\Action;
 use MageKnight\EnemyCombat\Phase as CombatPhase;
 use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;
-use MageKnight\EnemyCombat\BlockPhase;
+use MageKnight\EnemyCombat\Phase\Block;
 use MageKnight\EnemyCombat\SiegeAttack;
 use MageKnight\EnemyCombat\RangedAttack;
 
@@ -20,7 +20,7 @@ class RangedAndSiegeAttack implements CombatPhase
     {
         if ($this->canDefeat($enemy, $actions))
             return new Result(outcomes: new Outcomes(['fame' => $enemy->fame()]));
-        return new Result(phase: new BlockPhase());
+        return new Result(phase: new Block());
     }
 
     public function title(): string

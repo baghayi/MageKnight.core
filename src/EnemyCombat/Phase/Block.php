@@ -2,15 +2,21 @@
 
 declare(strict_types=1);
 
-namespace MageKnight\EnemyCombat;
+namespace MageKnight\EnemyCombat\Phase;
 
+use MageKnight\EnemyCombat\Phase;
 use MageKnight\Player\Action;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
 use MageKnight\Enemy\FireAttack;
+use MageKnight\EnemyCombat\Block as BlockAction;
+use MageKnight\EnemyCombat\IceBlock;
+use MageKnight\EnemyCombat\Result;
+use MageKnight\EnemyCombat\Outcomes;
+use MageKnight\EnemyCombat\AssignDamagePhase;
 
-class BlockPhase implements Phase
+class Block implements Phase
 {
     public function execute(Enemy $enemy, array $actions = []): Result
     {
@@ -32,7 +38,7 @@ class BlockPhase implements Phase
 
     private function canBlockEnemy(Enemy $enemy, Action $action = null): bool
     {
-        return $action instanceof Block && $this->totalBlocks($enemy, $action) >= $this->totalEnemyAttackHits($enemy);
+        return $action instanceof BlockAction && $this->totalBlocks($enemy, $action) >= $this->totalEnemyAttackHits($enemy);
     }
 
     private function totalEnemyAttackHits(Enemy $enemy): int
@@ -45,7 +51,7 @@ class BlockPhase implements Phase
         return $enemy instanceof Brutal ? $enemy->attackHits() * 2 : $enemy->attackHits();
     }
 
-    private function totalBlocks(Enemy $enemy, Block $action): int
+    private function totalBlocks(Enemy $enemy, BlockAction $action): int
     {
         if ($enemy instanceof FireAttack && !$action instanceof IceBlock)
             return (int) ($action->quantity() / 2);

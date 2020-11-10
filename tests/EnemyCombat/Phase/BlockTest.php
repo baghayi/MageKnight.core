@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Test\MageKnight\EnemyCombat;
+namespace Test\MageKnight\EnemyCombat\Phase;
 
 use PHPUnit\Framework\TestCase;
-use MageKnight\EnemyCombat\BlockPhase;
+use MageKnight\EnemyCombat\Phase\Block as BlockPhase;
 use MageKnight\EnemyCombat\AssignDamagePhase;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Block;
@@ -16,7 +16,7 @@ use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
 use MageKnight\Enemy\FireAttack;
 
-class BlockPhaseTest extends TestCase
+class BlockTest extends TestCase
 {
     private BlockPhase $phase;
 
