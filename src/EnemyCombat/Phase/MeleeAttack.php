@@ -8,7 +8,7 @@ use MageKnight\Enemy\Enemy;
 use MageKnight\EnemyCombat\Phase;
 use MageKnight\EnemyCombat\Result;
 
-class Attack implements Phase
+class MeleeAttack implements Phase
 {
 
     public function execute(Enemy $enemy, array $actions = []): Result

@@ -12,7 +12,7 @@ class AssignDamage implements Phase
 {
     public function execute(Enemy $enemy, array $actions = []): Result
     {
-        return new Result(phase: new Attack());
+        return new Result(phase: new MeleeAttack());
     }
 
     public function title(): string
