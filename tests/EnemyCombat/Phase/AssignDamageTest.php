@@ -6,7 +6,7 @@ namespace Test\MageKnight\EnemyCombat;
 
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Phase\AssignDamage;
-use MageKnight\EnemyCombat\AttackPhase;
+use MageKnight\EnemyCombat\Phase\Attack;
 use MageKnight\Enemy\Enemy;
 
 class AssignDamageTest extends TestCase
@@ -19,7 +19,7 @@ class AssignDamageTest extends TestCase
     {
         $phase = new AssignDamage();
         $result = $phase->execute($this->getEnemy());
-        $this->assertInstanceof(AttackPhase::class, $result->phase);
+        $this->assertInstanceof(Attack::class, $result->phase);
     }
 
     private function getEnemy(): Enemy
