@@ -10,7 +10,7 @@ use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
 use MageKnight\Enemy\FireAttack;
-use MageKnight\EnemyCombat\Block as BlockAction;
+use MageKnight\Player\Action\Block as BlockAction;
 use MageKnight\EnemyCombat\IceBlock;
 use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;

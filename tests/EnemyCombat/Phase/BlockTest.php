@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Phase\Block as BlockPhase;
 use MageKnight\EnemyCombat\Phase\AssignDamage;
 use MageKnight\EnemyCombat\Outcomes;
-use MageKnight\EnemyCombat\Block;
+use MageKnight\Player\Action\Block;
 use MageKnight\EnemyCombat\IceBlock;
 use MageKnight\EnemyCombat\ColdFireBlock;
 use MageKnight\Enemy\Enemy;

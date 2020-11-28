@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MageKnight\EnemyCombat;
+namespace MageKnight\Player\Action;
 
 use MageKnight\Player\Action;
 
