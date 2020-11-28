@@ -10,7 +10,7 @@ use MageKnight\EnemyCombat\Phase\AssignDamage;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\Player\Action\Block;
 use MageKnight\EnemyCombat\IceBlock;
-use MageKnight\EnemyCombat\ColdFireBlock;
+use MageKnight\Player\Action\ColdFireBlock;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
