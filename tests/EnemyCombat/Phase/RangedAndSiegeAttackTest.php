@@ -10,7 +10,7 @@ use MageKnight\EnemyCombat\Phase\Block;
 use MageKnight\EnemyCombat\Phase;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Fortified;
-use MageKnight\EnemyCombat\SiegeAttack;
+use MageKnight\Player\Action\SiegeAttack;
 use MageKnight\Player\Action\RangedAttack;
 use MageKnight\EnemyCombat\Outcomes;
 

@@ -11,7 +11,7 @@ use MageKnight\EnemyCombat\Phase as CombatPhase;
 use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Phase\Block;
-use MageKnight\EnemyCombat\SiegeAttack;
+use MageKnight\Player\Action\SiegeAttack;
 use MageKnight\Player\Action\RangedAttack;
 
 class RangedAndSiegeAttack implements CombatPhase
