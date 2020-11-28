@@ -11,7 +11,7 @@ use MageKnight\EnemyCombat\Phase;
 use MageKnight\Enemy\Enemy;
 use MageKnight\Enemy\Fortified;
 use MageKnight\EnemyCombat\SiegeAttack;
-use MageKnight\EnemyCombat\RangedAttack;
+use MageKnight\Player\Action\RangedAttack;
 use MageKnight\EnemyCombat\Outcomes;
 
 class RangedAndSiegeAttackTest extends TestCase

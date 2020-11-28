@@ -7,6 +7,7 @@ namespace MageKnight\EnemyCombat\Phase;
 use MageKnight\Enemy\Enemy;
 use MageKnight\EnemyCombat\Phase;
 use MageKnight\EnemyCombat\Result;
+use MageKnight\EnemyCombat\Outcomes;
 
 class MeleeAttack implements Phase
 {

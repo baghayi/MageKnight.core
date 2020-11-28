@@ -12,7 +12,7 @@ use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Phase\Block;
 use MageKnight\EnemyCombat\SiegeAttack;
-use MageKnight\EnemyCombat\RangedAttack;
+use MageKnight\Player\Action\RangedAttack;
 
 class RangedAndSiegeAttack implements CombatPhase
 {

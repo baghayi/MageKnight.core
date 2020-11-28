@@ -7,7 +7,7 @@ namespace Test\EnemyCombat;
 use PHPUnit\Framework\TestCase;
 use MageKnight\EnemyCombat\Combat;
 use MageKnight\EnemyCombat\Outcomes;
-use MageKnight\EnemyCombat\RangedAttack;
+use MageKnight\Player\Action\RangedAttack;
 use MageKnight\Enemy\Enemy;
 
 class CombatTest extends TestCase
