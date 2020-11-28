@@ -11,7 +11,7 @@ use MageKnight\Enemy\Swift;
 use MageKnight\Enemy\Brutal;
 use MageKnight\Enemy\FireAttack;
 use MageKnight\Player\Action\Block as BlockAction;
-use MageKnight\EnemyCombat\IceBlock;
+use MageKnight\Player\Action\IceBlock;
 use MageKnight\EnemyCombat\Result;
 use MageKnight\EnemyCombat\Outcomes;
 use MageKnight\EnemyCombat\Phase\AssignDamage;
